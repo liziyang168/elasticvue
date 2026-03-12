@@ -367,7 +367,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Bump Homebrew Cask
-        uses: macauley/action-homebrew-bump-cask@v1
+        uses: dawidd6/action-homebrew-bump-formula@v7
         with:
           token: ${{ secrets.HOMEBREW_TAP_TOKEN }}
           cask: elasticvue
