@@ -345,7 +345,7 @@ jobs:
           git clone ssh://aur@aur.archlinux.org/elasticvue-bin.git
           cd elasticvue-bin
           
-          sed -i "s/^pkgver=.*/pkgver=\$NEW_VER/" PKGBUILD
+          sed -i "s/^pkgver=.*/pkgver=$NEW_VER/" PKGBUILD
           sed -i "s/^pkgrel=.*/pkgrel=1/" PKGBUILD
           
           # Try updating checksums, retry once after 60s if GitHub assets aren't ready
@@ -358,7 +358,7 @@ jobs:
           
           makepkg --printsrcinfo > .SRCINFO
           git add PKGBUILD .SRCINFO
-          git commit -m "Update to v\$NEW_VER"
+          git commit -m "Update to v${NEW_VER}"
           git push
           EOF
 
