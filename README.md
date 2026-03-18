@@ -90,9 +90,8 @@ docker run -p 8080:8080 --name elasticvue -d cars10/elasticvue
 docker run -p 8080:8080 --name elasticvue -d ghcr.io/cars10/elasticvue
 ```
 
-When using docker you can provide some default cluster configuration for your users. Cluster will automatically be imported every time you start elasticvue.
-You can either set an environment
-variable or provide a config file as a volume. In either case the content should be a json array of your
+When using docker you can provide default cluster configuration for your users. Clusters will automatically be imported every time you start elasticvue.
+You can either set an environment variable or provide a config file as a volume. In either case the content should be a json array of your
 clusters, looking like this:
 
 ```json
@@ -139,8 +138,8 @@ docker run -p 8080:8080 -e ELASTICVUE_CLUSTERS='[{"name": "prod cluster", "uri":
 Example using config file volume to `/usr/share/nginx/html/api/default_clusters.json`:
 
 ```bash
-echo '[{"name": "prod cluster", "uri": "http://localhost:9200", "username": "elastic", "password": "elastic"}]' > /config.json
-docker run -p 8080:8080 -v /config.json:/usr/share/nginx/html/api/default_clusters.json cars10/elasticvue
+echo '[{"name": "prod cluster", "uri": "http://localhost:9200", "username": "elastic", "password": "elastic"}]' > config.json
+docker run -p 8080:8080 -v config.json:/usr/share/nginx/html/api/default_clusters.json cars10/elasticvue
 ```
 
 ## Elasticsearch configuration
@@ -168,9 +167,26 @@ If you use docker to run your elasticsearch cluster you can pass the options via
 
 ```bash
 docker run -p 9200:9200 \
+           -e "discovery.type=single-node" \
            -e "http.cors.enabled=true" \
            -e "http.cors.allow-origin=/.*/" \
-           elasticsearch
+           -e "http.cors.allow-headers=X-Requested-With,Content-Type,Content-Length,Authorization" \
+           docker.elastic.co/elasticsearch/elasticsearch:9.0.0
+```
+
+or `compose.yml`
+
+```yml
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.0.0
+    ports:
+      - "9200:9200"
+    environment:
+      - http.cors.enabled=true
+      - http.cors.allow-origin="/.*/"
+      - http.cors.allow-headers=X-Requested-With,Content-Type,Content-Length,Authorization
+      - discovery.type=single-node
 ```
 
 After configuration restart your cluster and you should be able to connect.
