@@ -3,6 +3,7 @@
 ## 1.15.0
 
 * fix copy-to-clipboard on windows, fixes [#344](https://github.com/cars10/elasticvue/issues/344)
+* fix ESC closing modal when search is open in editor, fixes [#346](https://github.com/cars10/elasticvue/issues/346)
 
 ## 1.14.0
 

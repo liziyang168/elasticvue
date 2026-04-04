@@ -5,6 +5,7 @@ import { Compartment, Prec } from '@codemirror/state'
 import { indentWithTab } from '@codemirror/commands'
 import { json } from '@codemirror/lang-json'
 import { baseTheme } from './CodeEditor/theme.ts'
+import { quasarSearchPanelEscapeExtension } from './CodeEditor/quasarSearchPanelEscapeExtension.ts'
 import { beautify } from '../helpers/beautify.ts'
 import { writeToClipboard } from '../helpers/clipboard.ts'
 import { useCodeEditorStore } from '../store/codeEditor.ts'
@@ -95,6 +96,7 @@ export const useCodeEditor = (
         // make sure vim is included before other keymaps
         codeEditorStore.vimMode ? vimExtension : [],
         basicSetup,
+        quasarSearchPanelEscapeExtension,
         json(),
         autocompletion({ override: [completions] }),
         onChange,
