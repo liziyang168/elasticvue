@@ -594,6 +594,13 @@
       "cancel_relocation": "Cancel reroute",
       "reroute": {
         "confirm": "Reroute shard '{shard}' from node '{fromNode}' to '{toNode}'?"
+      },
+      "allocation": {
+        "label": "Shard allocation",
+        "enable_confirm": "Enable shard allocation?",
+        "enable_growl": "Shard allocation enabled",
+        "disable_confirm": "Disable shard allocation?",
+        "disable_growl": "Shard allocation disabled"
       }
     }
   },
@@ -764,8 +771,6 @@
         "schedule": {
           "label": "Schedule*",
           "hint": "Cron expression (e.g., '0 30 1 * * ?' for daily at 1:30 AM)"
-        },
-        "repository": {
         },
         "indices": {
           "label": "Indices",

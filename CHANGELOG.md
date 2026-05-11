@@ -5,6 +5,8 @@
 * fix copy-to-clipboard on windows, fixes [#344](https://github.com/cars10/elasticvue/issues/344)
 * fix ESC closing modal when search is open in editor, fixes [#346](https://github.com/cars10/elasticvue/issues/346)
 * fix table sorting, fixes [#347](https://github.com/cars10/elasticvue/issues/347)
+* add button to enable/disable shard allocation, fixes [#348](https://github.com/cars10/elasticvue/issues/348)
+* fix setup for clusters with too many shards, fixes[#354](https://github.com/cars10/elasticvue/issues/354)
 * update to nodejs 24
 
 ## 1.14.0

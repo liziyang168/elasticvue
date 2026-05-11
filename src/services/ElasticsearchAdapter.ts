@@ -193,14 +193,16 @@ export default class ElasticsearchAdapter {
     return this.request(path, 'DELETE')
   }
 
-  search(params: object, searchIndex?: string | string[]) {
+  search(params: object, searchIndex?: string | string[], queryParams?: Record<string, string>) {
     const index = Array.isArray(searchIndex) ? searchIndex.join(',') : searchIndex
 
-    if (index && index.length > 0) {
-      return this.request(`${cleanIndexName(index)}/_search`, 'POST', params)
-    } else {
-      return this.request('_search', 'POST', params)
+    let path = index && index.length > 0 ? `${cleanIndexName(index)}/_search` : '_search'
+
+    if (queryParams && Object.keys(queryParams).length > 0) {
+      path += `?${new URLSearchParams(queryParams).toString()}`
     }
+
+    return this.request(path, 'POST', params)
   }
 
   docsBulkDelete(documents: any[]) {
@@ -226,6 +228,14 @@ export default class ElasticsearchAdapter {
 
   clusterReroute(commands: object) {
     return this.request('_cluster/reroute', 'POST', { commands })
+  }
+
+  clusterGetSettings() {
+    return this.request('_cluster/settings', 'GET')
+  }
+
+  clusterPutSettings(body: object) {
+    return this.request('_cluster/settings', 'PUT', body)
   }
 
   catShards(params: object, filter?: string) {
@@ -377,7 +387,7 @@ export default class ElasticsearchAdapter {
   async test() {
     try {
       const info = await this.ping()
-      await this.search({ size: 0 })
+      await this.search({}, 'no_indices_match_this_pattern*', { allow_no_indices: 'true', ignore_unavailable: 'true', size: '0' })
       return Promise.resolve(info)
     } catch (e) {
       return Promise.reject(e)

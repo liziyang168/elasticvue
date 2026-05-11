@@ -576,6 +576,13 @@
       "cancel_relocation": "Annuler le reroutage",
       "reroute": {
         "confirm": "Rerouter la partition '{shard}' du noeud '{fromNode}' vers '{toNode}' ?"
+      },
+      "allocation": {
+        "label": "Allocation des partitions",
+        "enable_confirm": "Activer l'allocation des partitions ?",
+        "enable_growl": "Allocation des partitions activée",
+        "disable_confirm": "Désactiver l'allocation des partitions ?",
+        "disable_growl": "Allocation des partitions désactivée"
       }
     }
   },
@@ -746,8 +753,6 @@
         "schedule": {
           "label": "Planification*",
           "hint": "Expression cron (ex: '0 30 1 * * ?' pour tous les jours à 1h30)"
-        },
-        "repository": {
         },
         "indices": {
           "label": "Indices",

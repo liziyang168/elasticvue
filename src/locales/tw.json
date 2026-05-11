@@ -576,6 +576,13 @@
       "cancel_relocation": "取消重新路由",
       "reroute": {
         "confirm": "確定要將分片 '{shard}' 從節點 '{fromNode}' 重新路由至 '{toNode}'？"
+      },
+      "allocation": {
+        "label": "分片分配",
+        "enable_confirm": "啟用分片分配？",
+        "enable_growl": "分片分配已啟用",
+        "disable_confirm": "停用分片分配？",
+        "disable_growl": "分片分配已停用"
       }
     }
   },
@@ -746,8 +753,6 @@
         "schedule": {
           "label": "排程*",
           "hint": "Cron 表達式（例如，'0 30 1 * * ?' 表示每天凌晨 1:30）"
-        },
-        "repository": {
         },
         "indices": {
           "label": "索引",

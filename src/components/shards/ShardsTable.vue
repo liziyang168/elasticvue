@@ -22,6 +22,8 @@
     </div>
 
     <div class="flex">
+      <shard-allocation-button />
+
       <slot />
 
       <filter-input v-model="shardsStore.filter" :columns="['index']" />
@@ -147,6 +149,7 @@ import FilterInput from '../shared/FilterInput.vue'
 import { useTranslation } from '../../composables/i18n'
 import { ShardsTableProps, useShardsTable } from '../../composables/components/shards/ShardsTable.ts'
 import FilterState from '../shared/FilterState.vue'
+import ShardAllocationButton from './ShardAllocationButton.vue'
 
 const t = useTranslation()
 const props = defineProps<ShardsTableProps>()
