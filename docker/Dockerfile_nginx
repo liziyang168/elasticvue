@@ -1,5 +1,5 @@
 # Build elasticvue
-FROM node:22.20.0-bookworm AS builder
+FROM node:24.15.0-bookworm AS builder
 RUN mkdir /app
 WORKDIR /app
 COPY package.json package-lock.json ./
