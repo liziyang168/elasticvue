@@ -27,6 +27,21 @@ const routes = [
     }
   },
   {
+    path: '/redirect_to_cluster',
+    redirect: (to: RouteLocation) => {
+      const connectionStore = useConnectionStore()
+      const clusterName = typeof to.query.name === 'string' ? to.query.name.trim() : ''
+
+      if (clusterName && connectionStore.setActiveClusterByName(clusterName)) {
+        return { name: 'home', params: { clusterIndex: connectionStore.activeClusterIndex }, query: {} }
+      }
+
+      const cluster = connectionStore.checkAndSetActiveCluster()
+      if (cluster) return { name: 'home', params: { clusterIndex: connectionStore.activeClusterIndex }, query: {} }
+      return { name: 'welcome' }
+    }
+  },
+  {
     path: '/cluster/:clusterIndex',
     component: NestedView,
     children: [

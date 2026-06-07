@@ -191,6 +191,19 @@ services:
 
 After configuration restart your cluster and you should be able to connect.
 
+## Tips & Tricks
+
+#### Deeplink to a cluster
+
+If needed you can create a link to a cluster by name, e.g. for internal tooling: 
+`/redirect_to_cluster?name=<cluster name>`
+
+Example:
+
+`/redirect_to_cluster?name=dev%20cluster`
+
+Cluster names are matched case-insensitive. Fallback is the first cluster.
+
 ## Browser Support
 
 Any current version of Chrome, Firefox and Edge should work without issues. Safari is mostly untested so your

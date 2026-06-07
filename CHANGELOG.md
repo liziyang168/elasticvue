@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.16.0
+
+* add `/redirect_to_cluster?name=` route to deeplink to a cluster by name, fixes [#342](https://github.com/cars10/elasticvue/issues/342)
+
 ## 1.15.0
 
 * fix copy-to-clipboard on windows, fixes [#344](https://github.com/cars10/elasticvue/issues/344)

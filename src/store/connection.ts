@@ -104,6 +104,21 @@ export const useConnectionStore = defineStore('connection', {
         this.activeClusterIndex = clusterIndex
         return true
       }
+    },
+    findClusterIndexByName(name: string) {
+      if (!name || this.clusters.length === 0) return -1
+
+      const normalizedName = name.trim().toLowerCase()
+      if (!normalizedName) return -1
+
+      return this.clusters.findIndex((cluster) => cluster.name.trim().toLowerCase() === normalizedName)
+    },
+    setActiveClusterByName(name: string) {
+      const clusterIndex = this.findClusterIndexByName(name)
+      if (clusterIndex < 0) return false
+
+      this.activeClusterIndex = clusterIndex
+      return true
     }
   },
   persist: true

@@ -135,6 +135,30 @@ withElastic(({ mockElastic, elastic }) => {
           expect(page.url()).toContain('/cluster/1')
         })
 
+        test('redirect_to_cluster selects cluster by name', async ({ page }) => {
+          await setupClusterConnection(page)
+
+          await page.goto('http://localhost:5175/redirect_to_cluster?name=dev%20cluster')
+          await page.waitForURL('**/cluster/1')
+          expect(page.url()).toContain('/cluster/1')
+        })
+
+        test('redirect_to_cluster is case-insensitive', async ({ page }) => {
+          await setupClusterConnection(page)
+
+          await page.goto('http://localhost:5175/redirect_to_cluster?name=DEFAULT%20CLUSTER')
+          await page.waitForURL('**/cluster/0')
+          expect(page.url()).toContain('/cluster/0')
+        })
+
+        test('redirect_to_cluster falls back when no cluster matches', async ({ page }) => {
+          await setupClusterConnection(page)
+
+          await page.goto('http://localhost:5175/redirect_to_cluster?name=unknown-cluster')
+          await page.waitForURL('**/cluster/0')
+          expect(page.url()).toContain('/cluster/0')
+        })
+
         test('redirects for non-existing clusters', async ({ page }) => {
           await setupClusterConnection(page)
 
