@@ -17,9 +17,7 @@ export const useNodesTable = (props: NodesTableProps) => {
   const results = computed(() => props.nodes)
   const filteredResults = computed(() => {
     const list = results.value.filter(
-      (r) =>
-        nodesStore.nodeRoles.length === 0 ||
-        nodesStore.nodeRoles.some((role) => r['node.role']?.includes(role))
+      (r) => nodesStore.nodeRoles.length === 0 || nodesStore.nodeRoles.some((role) => r['node.role']?.includes(role))
     )
     const nodes = filterItems<EsNode>(list, nodesStore.filter, ['name', 'ip', 'id', 'version'])
     return nodes.map((r) => new ElasticsearchNode(r))

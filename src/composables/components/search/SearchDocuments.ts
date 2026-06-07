@@ -5,10 +5,7 @@ import { Ref, ref, watch } from 'vue'
 import { parseJson } from '../../../helpers/json/parse'
 import { DEFAULT_SEARCH_QUERY_OBJ } from '../../../consts'
 import { stringifyJson } from '../../../helpers/json/stringify.ts'
-import {
-  buildQueryFromTableOptions,
-  getTableOptionsToApply
-} from '../../../helpers/search/searchQueryTableOptions'
+import { buildQueryFromTableOptions, getTableOptionsToApply } from '../../../helpers/search/searchQueryTableOptions'
 import { paginationFromQuery } from '../../../helpers/search/paginationFromQuery'
 
 export type EsSearchResult = {
@@ -82,8 +79,7 @@ export const useSearchDocuments = () => {
     const query = parseJson(searchStore.searchQuery) as Record<string, unknown>
     const tableOptions = buildQueryFromTableOptions(pagination)
     const sortByChanged = pagination.sortBy !== searchStore.pagination.sortBy
-    const toApply =
-      sortByChanged ? tableOptions : getTableOptionsToApply(query, tableOptions, pagination)
+    const toApply = sortByChanged ? tableOptions : getTableOptionsToApply(query, tableOptions, pagination)
     Object.assign(query, toApply)
 
     searchStore.pagination.page = pagination.page

@@ -70,9 +70,9 @@ export function useElasticsearchAdapter() {
           }
           let result
           if (response.every((r: Response) => r.ok)) {
-            result = {acknowledged: true}
+            result = { acknowledged: true }
           } else {
-            result = {apiErrorMessage: 'Some requests failed.'}
+            result = { apiErrorMessage: 'Some requests failed.' }
           }
 
           return Promise.resolve(result)

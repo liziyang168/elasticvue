@@ -54,18 +54,13 @@ export const getTableOptionsToApply = (
   // Covers: multiple array entries; one entry with several keys (manual JSON); strings like "_doc"/"_score";
   // shorthand forms are objects with one key; non-objects (strings) have field count 0.
   const hasMultiSort = Boolean(
-    querySortArray &&
-      (querySortArray.length > 1 || (querySortArray.length === 1 && firstClauseFieldCount !== 1))
+    querySortArray && (querySortArray.length > 1 || (querySortArray.length === 1 && firstClauseFieldCount !== 1))
   )
-  const hasSingleSort = Boolean(
-    querySortArray && querySortArray.length === 1 && firstClauseFieldCount === 1
-  )
+  const hasSingleSort = Boolean(querySortArray && querySortArray.length === 1 && firstClauseFieldCount === 1)
   const tableHasSort = Boolean(pagination.sortBy)
   const tableMatchesQuery = hasSingleSort && tableHasSort && tableSortMatchesQuerySort(tableOptions.sort, querySort)
   const tableSameFieldAsQuery =
-    tableHasSort &&
-    hasSingleSort &&
-    firstSortClauseField((querySort as unknown[])[0]) === pagination.sortBy
+    tableHasSort && hasSingleSort && firstSortClauseField((querySort as unknown[])[0]) === pagination.sortBy
 
   if (hasMultiSort) return onlyFromAndSize(tableOptions)
   // Preserve manual single-field sort when paginating, unless the UI is driving that same field
